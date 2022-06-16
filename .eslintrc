@@ -1,0 +1,39 @@
+{
+    "env": {
+      "browser": true,
+      "es6": true
+    },
+    "parser": "@typescript-eslint/parser",
+    "extends": [
+      "plugin:react/recommended",
+      "plugin:@typescript-eslint/recommended",
+      "prettier",
+      "prettier/@typescript-eslint",  // agrega las reglas de prettier a eslint
+      "plugin:prettier/recommended"
+    ],
+    "parserOptions": {
+      "ecmaVersion": 2018,
+      "sourceType": "module",
+      "ecmaFeatures": {
+        "jsx": true // permite a eslint analizar los archivos jsx o tsx
+      }
+    },
+    "rules": {
+        "strict": 0,
+        "indent": ["error", 2],
+        "semi": ["error", "never"],
+        "no-empty-function": "off",
+        "@typescript-eslint/no-empty-function": "off",
+        "react/display-name": "off",
+        "react/prop-types": "off",
+        "react/react-in-tsx-scope": "off"
+    },
+    "plugins": [
+      "react"
+    ],
+    "settings": {
+      "react": {
+        "version": "detect"
+      }
+    }
+   }
