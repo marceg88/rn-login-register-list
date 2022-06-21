@@ -15,24 +15,18 @@ type registerScreenProp = StackNavigationProp<RootStackParamsList, 'Register'>
 const FormRegisterScreen = () => {
     const navigation = useNavigation<registerScreenProp>()
     const dispatch = useDispatch()
-    // const user = useSelector(selectUser)
-
     const [email, setEmail] = useState({value: '', error: ''})
     const [password, setPassword] = useState({value:'', error: ''})
-    const onLoginPressed = () => {
-        
-        const emailValue = email.value
-        
+    const onLoginPressed = () => {     
+        const emailValue = email.value     
         const passwordValue = password.value
-        console.log(passwordValue)
-        
+        console.log(passwordValue)   
     }
     
     return(
         <View style={styles.container}>
             <View style={styles.container2}>
             <Text style={styles.title}>Registrate!</Text>  
-            
             <Input 
                 label="Usuario"
                 style={styles.input}  
@@ -49,12 +43,9 @@ const FormRegisterScreen = () => {
                 title="registrar"
                 onPress={onLoginPressed}
             /> 
-            </View>
-            
+            </View>         
         </View>
     )
-
-
 }
 
 const styles = StyleSheet.create({
@@ -72,7 +63,6 @@ const styles = StyleSheet.create({
         borderBottomRightRadius:6,
         borderTopLeftRadius:6,
         borderTopRightRadius:6,
-        // marginTop: 50,
         alignItems: "center",
         justifyContent: "center"
     },

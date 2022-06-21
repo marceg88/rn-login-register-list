@@ -2,7 +2,7 @@ import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { FormData } from "../types/types";
 import { RootState } from "./store";
-import crypto from "crypto"
+import { responseData } from "../util/functions/functions";
 
 type UsersState = {
     list: []
@@ -32,17 +32,7 @@ export const signIn = createAsyncThunk(
                 email,
                 password
             })
-            const authorization = {
-                token: response.headers['authorization']
-            }
-            const user = response.data
-            const status = response.status
-            const data = {
-                email,
-                user,
-                authorization,
-                status
-            }
+            const data = await responseData(email, response)
             return data
         } catch (error) {
             const errorMessage = 'There was an error'
@@ -58,17 +48,7 @@ export const Register = createAsyncThunk(
                 email,
                 password
             })
-            const authorization = {
-                token: response.headers['authorization']
-            }
-            const user = response.data
-            const status = response.status
-            const data = {
-                email,
-                user,
-                authorization,
-                status
-            }
+            const user = await responseData(email, response)
             return user
         } catch (error) {
             const errorMessage = 'There was an error'
@@ -78,17 +58,11 @@ export const Register = createAsyncThunk(
 )
 export const getInfo = createAsyncThunk(
     "users/getInfo",
-    async (token: string) => {
+    async ({token, page}: {token: string, page: number}) => {
         try {
-            const response = await axios.get(`https://reqres.in/api/${token}`)
+            const response = await axios.get(`https://reqres.in/api/${token}?page=${page}`)
             const list = response.data
-            console.log("list", list)
-            const status = response.status
-            const data = {
-                list,
-                status
-            }
-            return data
+            return list
         } catch (error) {
             const errorMessage = 'There was an error'
             throw new Error(errorMessage)
@@ -102,24 +76,19 @@ export const userSlice = createSlice({
         logout(state) {
             state.data;
             window.localStorage.clear();
-        },
-        
+        },     
     },
     extraReducers: (builder) => {
         builder.addCase(signIn.fulfilled, (state, {payload}) => {
-            console.log("singInExist", payload)
             state.data = payload.user
             state.status = payload.status
             state.token = payload.user.token
             state.error = null
-            // window.localStorage.setItem('token', payload.authorization.token)
         })
         .addCase(getInfo.fulfilled, (state, {payload}) => {
-            console.log("getExist", payload.list)
-            state.list = payload.list
+            state.list = payload.data
             state.status = payload.status
             state.error = null
-            // window.localStorage.setItem('token', payload.authorization.token)
         })
         
     }

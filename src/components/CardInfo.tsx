@@ -1,4 +1,4 @@
-import { Image, View, Text } from "react-native"
+import { Image, View, Text, StyleSheet } from "react-native"
 
 type Props = {
     id: number,
@@ -9,15 +9,29 @@ type Props = {
 }
 
 const CardInformation = ({id, name, year, color, pantone_value}: Props) => {
-    console.log("entra2")
+    const backgroundColorDin = {
+        backgroundColor: color
+    }
     return(
-        <View key={id}>
-            <Text >name: {name}</Text>
-            <Text >year: {year}</Text>
-            <Text >color: {color}</Text>
-            <Text >pantone_value: {pantone_value}</Text>
+        <View style={[style.container, backgroundColorDin]}  key={id}>
+            <Text >Name: {name}</Text>
+            <Text >Year: {year}</Text>
+            <Text >Color: {color}</Text>
+            <Text >PantoneValue: {pantone_value}</Text>
         </View>
     )
 }
+
+const style = StyleSheet.create({
+    container:{
+        elevation: 8,
+        backgroundColor: "#009688",
+        width: "45%",
+        borderRadius: 10,
+        paddingVertical: 8,
+        paddingHorizontal: 12,
+        margin: 5
+    }
+})
 
 export default CardInformation

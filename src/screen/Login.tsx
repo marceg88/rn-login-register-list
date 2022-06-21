@@ -1,5 +1,5 @@
 import { useState } from "react"
-import { View, Text, TextInput, Button, StyleSheet, Alert } from "react-native"
+import { View, Text, StyleSheet } from "react-native"
 import { StackNavigationProp } from "@react-navigation/stack"
 import { RootStackParamsList } from "../navigator/RootStackParams"
 import { useNavigation } from "@react-navigation/native"
@@ -9,8 +9,7 @@ import { getInfo, selectStatus, selectToken, selectUser, signIn } from "../store
 import Input from "../components/TextInput"
 import ButtonForm from "../components/Button"
 import { AppDispatch } from "../store/store"
-import { useEffect } from "react"
-import { ResultWithContext } from "express-validator/src/chain"
+
 
 type loginScreenProp = StackNavigationProp<RootStackParamsList, 'Login'>
 export default function LoginScreen() {
